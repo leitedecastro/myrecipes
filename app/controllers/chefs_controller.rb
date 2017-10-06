@@ -7,6 +7,10 @@ class ChefsController < ApplicationController
     @chef = Chef.new
   end
   
+  def edit
+    @chef = Chef.find(params[:id])
+  end
+  
   def create
     @chef = Chef.new(chef_params)
     if @chef.save
@@ -14,6 +18,16 @@ class ChefsController < ApplicationController
       redirect_to chef_path(@chef)
     else
       render 'new'
+    end
+  end
+  
+  def update
+    @chef = Chef.find(params[:id])
+    if @chef.update(chef_params)
+      flash[:success] = 'Your account was updated successfully'
+      redirect_to @chef
+    else
+      render 'edit'
     end
   end
   

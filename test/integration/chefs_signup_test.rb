@@ -38,4 +38,5 @@ class ChefsSignupTest < ActionDispatch::IntegrationTest
     assert_template 'chefs/show'
     assert_not flash.empty?
   end
+  
 end

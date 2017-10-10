@@ -34,7 +34,7 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <hr />
-      <%= form_for([@recipe, @comment], :html => {class: "form-horizontal", role: "form"}) do |f| %>
+      <%= form_for([@recipe, @comment], remote: true, :html => {class: "form-horizontal", role: "form"}) do |f| %>
         <div class="form-group">
           <div class="control-label col-md-2">
             <%= f.label :description, 'Comment' %>
@@ -54,19 +54,15 @@
   </div>
 <% end %>
 
-<% if @recipe.comments.any? %>
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <h3>Comments:</h3>
-      <div id="messages">
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <h3>Comments:</h3>
+    <div id="messages">
+      <% if @recipe.comments.any? %>
         <%= render partial: 'comments/comments', object: @comments %>
-      </div>
+      <% else %>
+        <h3>No comments yet!</h3>
+      <% end %>
     </div>
   </div>
-<% else %>
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <h3>No comments yet!</h3>
-    </div>
-  </div>
-<% end %>
+</div>
